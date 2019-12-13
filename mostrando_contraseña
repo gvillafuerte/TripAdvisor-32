@@ -1,0 +1,134 @@
+import React, { useState } from 'react';
+import {StyleSheet, View, ScrollView, Text} from 'react-native';
+import {Input, Icon, Button, Image} from 'react-native-elements'
+
+// uso del useState (uso de estado) para saber si es true o false los campos con tipo paswword
+export default function Registerform(){
+const [hidePassword, setHidePassword] = useState(true);
+const [hidePassword2, setHidePassword2] = useState(true);
+
+const register = () => {
+    console.log("simula guardar registro") 
+}
+    return(
+    <View style={styles.formContainer}>
+       <Input 
+          placeholder="Correo Electronico"
+          containerStyle={styles.inputForm}
+          onChange={() => console.log('Email Actualizado')}
+          rightIcon={
+                <Icon
+                   type="material-community"
+                   name="at"
+                   iconStyle={styles.iconRight}
+                 />
+              }            
+           />
+         
+          <Input
+            placeholder = "Contraseña"
+            password={true}
+            // Jala la variable del userState (si esta ture o false)
+            SecureTextEntry={hidePassword}
+            containerStyle={styles.inputForm}
+            onChange={() => console.log('Contraseña Actualizado')}
+            rightIcon={
+                <Icon
+                   type="material-community"
+                   // Aqui en el nombre del icono pregunta x el state (si esta ture o false) cambia el nombre del icono
+                   name={hidePassword ? "eye-outline" : "eye-off-outline"}
+                   iconStyle={styles.iconRight}
+                   onPress={() => setHidePassword(!hidePassword)}
+                 />
+              }            
+           />    
+
+          <Input
+            placeholder = "Repetir Contraseña"
+            password={true}
+            SecureTextEntry={hidePassword2}
+            containerStyle={styles.inputForm}
+            onChange={() => console.log('Repetir Contraseña Actualizado')}
+            rightIcon={
+                <Icon
+                type="material-community"
+                // Aqui en el nombre del icono pregunta x el state (si esta ture o false) cambia el nombre del icono
+                name={hidePassword2 ? "eye-outline" : "eye-off-outline"}
+                iconStyle={styles.iconRight}
+                onPress={() => setHidePassword2(!hidePassword2)}
+                 />
+              }            
+           />    
+
+                <Button 
+                    buttonStyle={styles.btnRegister}
+                    containerStyle={styles.btnContainerRegister}
+                    title="Enviar"
+                    onPress={(register) => navigation.navigate("Login")}  // Aqui ya se llama al la hoja login
+                 /> 
+ 
+</View>
+)
+}
+
+
+// Estas son las propiedades de todos los elementos que estan dentro del ScrollView de la pantalla
+const styles = StyleSheet.create({
+    viewBody: {                                // Propiedades del ViewBody
+        marginLeft:30,
+        marginRight:30
+    },
+
+    formContainer: {                                   // Propiedades del Image (LOGO 5-tenedores)que estamos usando
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: "center",
+        marginTop: 30
+    },
+
+    inputForm: {                                   // Propiedades del Image (LOGO 5-tenedores)que estamos usando
+        width: "100%",
+        marginTop: 20
+    },
+
+    iconRight: {                                   // Propiedades del Image (LOGO 5-tenedores)que estamos usando
+        color: "#c1c1c1",
+        fontWeight: 'bold'
+    },
+
+    btnContainerRegister: {                                   // Propiedades del Image (LOGO 5-tenedores)que estamos usando
+      marginTop: 20,
+      width: "95%"   
+    },
+
+    btnRegister: {                                   // Propiedades del Image (LOGO 5-tenedores)que estamos usando
+       backgroundColor: "#00a680"
+      },
+  
+
+
+    title: {                                   // Propiedades del titulo de "Consulta tu perfil 5 tenedores"
+      fontWeight: "bold",
+      fontSize: 19,
+      marginBottom: 10,
+      textAlign: "center"
+    },
+    description: {                             // Propiedades del titulo de "Pregunta como describirias"
+        textAlign: "center",
+        marginBottom: 20
+    },
+
+    viewBtn: {                                  // Propiedades del boton
+        flex :1,
+        alignItems: "center"
+    },
+
+    btnStyle:{                                  // Propiedades Estilo del Boton     
+        backgroundColor: "#00a680"
+    },
+
+    btnContainer: {                             // Propiedades Tamaño del boton 
+        width: "70%"
+        
+    }
+})
